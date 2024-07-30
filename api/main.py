@@ -98,7 +98,7 @@ def verify_app_secret(credentials: HTTPAuthorizationCredentials = Depends(securi
     return credentials.credentials
 
 
-@app.options("/v1/chat/completions")
+@app.options("/hf/v1/chat/completions")
 async def chat_completions_options():
     return Response(
         status_code=200,
@@ -114,7 +114,7 @@ def replace_escaped_newlines(input_string: str) -> str:
     return input_string.replace('\\n', '\n')
 
 
-@app.post("/v1/chat/completions")
+@app.post("/hf/v1/chat/completions")
 async def chat_completions(request: ChatRequest, app_secret: str = Depends(verify_app_secret)):
     logger.info(f"Received chat completion request for model: {request.model}")
 
